@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUMBER GUESSING GAME</title>
+    <style>
+        .container{
+            width:400px;
+            height:auto;
+            justify-content: center;
+            margin:auto;
+            border-radius: 20px;
+            background-color: transparent;
+            box-shadow: 0px 0px 20px rgb(242, 242, 242);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border:1px solid white;
+        }
+
+        .rule{
+            color: #ffffff;
+            margin-top: 25px;
+        }
+
+        body{
+            background:linear-gradient(#980505,#240bc5);
+            width:auto;
+            height:100vh;
+        }
+        #random{
+            height:50px;
+            width:190px;
+            font-size: 20px;
+            border:2px solid rgb(6, 1, 244);
+            text-align: center;
+            margin:20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 12px rgb(255, 255, 255);
+        }
+
+        #random:hover{
+            background-color: seashell;
+            color:red;
+        }
+
+
+        #submit,#StartGame{
+            padding:10px 15px;
+            background:linear-gradient(rgb(22, 0, 218),rgb(211, 31, 31));
+            border-radius: 15px;
+            border:2px solid rgb(255, 253, 253);
+            color:rgb(255, 255, 255);
+            font-size:15px;
+            font-weight:bold;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgb(255, 255, 255);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #submit:hover{
+            background: linear-gradient(rgb(255, 6, 6),rgb(21, 4, 213));
+            color:rgb(255, 255, 255);
+            cursor: pointer;
+        }
+        #submit:active{
+            transform: translateY(2px);
+
+        }
+
+        #StartGame{
+            font-size: 15px;
+            background-color:rgb(216, 50, 50);
+            text-align: center;
+           
+        }
+        
+        #StartGame:hover{
+            color:rgb(255, 255, 255);
+            cursor: pointer;
+            background: linear-gradient(rgb(255, 6, 6),rgb(21, 4, 213));
+        }
+
+        #StartGame:active{
+            transform: translateY(2px);
+        }
+
+    </style>
+</head>
+<body>
+        <h1 style="color: rgb(255, 255, 255); font-family:  Verdana, Geneva, Tahoma, sans-serif; text-align:center;" >NUMBER GUESSING GAME</h1>
+    <center>
+        <div class="container">
+            <br>
+    <span class="rule">Guess a Number between <b>1</b> and <b>100</b></span>
+    <br>
+    <input id = "random" type="number" placeholder="enter a number"><br>
+    <button id = "submit">Submit</button>
+    <p id="result" style="color:rgb(253, 253, 255)"></p>
+    <p id="gameover" style="color:rgb(255, 255, 255)"></p>
+    <p id="guess" style="color:rgb(255, 255, 255)"></p>
+    <h2 style="color: rgb(255, 255, 255); font-family: Verdana, Geneva, Tahoma, sans-serif;">START NEW GAME</h2>
+    <button id="StartGame">RESTART</button>
+    <p class="rule">You have only 5 chances</p>
+    <br>
+    <br>
+    </center>
+</div>
+</body>
+<script>
+       let guess=0;
+       const expectedNumber = Math.floor(Math.random()*101);
+       console.log( expectedNumber);
+      document.getElementById("submit").addEventListener("click",function(event)
+     {
+        let number = document.getElementById("random").value;
+
+        if (number === "")
+         {
+            alert("Please enter a number!");
+            return;
+        }
+
+        if(number == expectedNumber)
+        {
+            document.getElementById("result").textContent=`Congratulations🎉 Your Number ${number} is matched with the Secret Number`;
+            document.getElementById("gameover").innerText =`GameOver🤩`;
+            document.getElementById("submit").disabled = true;
+        } 
+        else if(number < expectedNumber)
+        {
+            document.getElementById("result").textContent=`Your number ${number} is less than expected number`;
+        } 
+        else
+        {
+            document.getElementById("result").textContent=`Your number ${number} is more than expected number`;
+        }
+        guess++;
+        document.getElementById("guess").textContent = ` Number of Attempts are ${guess}`;
+        event.preventDefault();
+
+
+        if(guess >= 5)
+            {
+                document.getElementById("gameover").innerText =`GameOver❌`;
+                document.getElementById("submit").disabled = true;
+                if(number != expectedNumber)
+                {
+                    document.getElementById("gameover").innerText =`GameOver❌ The Secret Number is ${expectedNumber} `;
+                }
+            }
+
+    });
+
+    document.getElementById("StartGame").onclick=function()
+    {
+       location.reload();
+    }
+
+
+
+
+    </script>
+
+</html>
